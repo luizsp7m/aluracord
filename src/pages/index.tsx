@@ -62,7 +62,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Log In | Alura's Witchers</title>
+        <title>{`Log In | Alura's Witchers`}</title>
       </Head>
 
       <div className={styles.container}>
@@ -70,7 +70,7 @@ export default function Home() {
           <div className={styles.content}>
             <div>
               <h1>Welcome</h1>
-              <span>Discord - Alura's Witchers</span>
+              <span>{`Discord - Alura's Witchers`}</span>
             </div>
 
             <form onSubmit={onLogIn}>
