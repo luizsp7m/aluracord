@@ -19,7 +19,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items: center;
-  background: #2D3748;
+  background: #1a202c;
 }
 
 .content {
@@ -63,7 +63,7 @@
     input {
       padding: 0 1.2rem;
       font-size: 1.4rem;
-      background: #1A202C;
+      background: #2D3748;
       transition: background .2s ease-in-out;
       border: 1px solid transparent;
 
@@ -100,9 +100,11 @@
   flex-direction: column;
   align-items: center;
   gap: 1.6rem;
-  background: #1A202C;
+  background: #2D3748;
   border-radius: 0.8rem;
   padding: 2.4rem;
+  width: 188px;
+  height: 223px;
 
   img {
     height: 150px;
@@ -114,7 +116,7 @@
   span {
     font-size: 1.4rem;
     color: #E2E8F0;
-    background: #2D3748;
+    background: #1a202c;
     padding: 0.5rem 0.75rem;
     border-radius: .4rem;
   }

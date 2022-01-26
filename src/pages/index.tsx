@@ -4,18 +4,13 @@ import styles from "../styles/home.module.scss";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDebounce } from "../utils/useDebounce";
-import { api } from "../services/api";
-
-interface User {
-  login: string;
-  avatar_url: string;
-}
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Home() {
   const [username, setUsername] = useState("");
   const [usernameDisplay, setUsernameDisplay] = useState(username);
-  const [user, setUser] = useState<User>();
   const [error, setError] = useState(null);
+  const { user, getUser } = useAuth();
 
   const router = useRouter();
 
@@ -24,10 +19,12 @@ export default function Home() {
 
     if (user) {
       router.push("/chat");
+    } else {
+      onError("Username invalid");
     }
   }
 
-  const debouncedChange = useDebounce(setUsername, 500);
+  const debouncedChange = useDebounce(setUsername, 750);
 
   function onChangeUsername(value: string) {
     setUsernameDisplay(value);
@@ -35,34 +32,22 @@ export default function Home() {
     setError(null);
   }
 
-  async function getUser() {
-    try {
-      const { data } = await api.get(`${username}`);
-      setUser(data);
+  function onError(message: string) {
+    setError(message);
 
-    } catch (error) {
-      setError(error.message);
-
-      setTimeout(() => {
-        setError(null);
-      }, 4000);
-
-      setUser(null);
-    }
+    setTimeout(() => {
+      setError(null);
+    }, 4000);
   }
 
   useEffect(() => {
-    if (username !== "") {
-      getUser();
-    } else {
-      setUser(null);
-    }
+    getUser({ username, onError });
   }, [username]);
 
   return (
     <>
       <Head>
-        <title>{`Log In | Alura's Witchers`}</title>
+        <title>Log In | Alura Witcher</title>
       </Head>
 
       <div className={styles.container}>
@@ -70,7 +55,7 @@ export default function Home() {
           <div className={styles.content}>
             <div>
               <h1>Welcome</h1>
-              <span>{`Discord - Alura's Witchers`}</span>
+              <span>Discord - Alura Witcher</span>
             </div>
 
             <form onSubmit={onLogIn}>
@@ -94,11 +79,16 @@ export default function Home() {
           </div>
 
           <div className={styles.image}>
-            <img
-              src={user ? user.avatar_url : "/assets/geralt.jpg"}
-              alt={`${username} image`}
-            />
-            <span>{user ? user.login : "Geralt"}</span>
+            {user && (
+              <>
+                <img
+                  src={user.avatar_url}
+                  alt={user.login}
+                />
+
+                <span>{user.login}</span>
+              </>
+            )}
           </div>
         </div>
       </div>
