@@ -5,7 +5,9 @@
     "created_at": "2022-01-26T20:41:40.734Z",
     "user": {
       "login": "Ciri",
-      "avatar_url": "/assets/ciri.jpg"
+      "avatar_url": "/assets/ciri.jpg",
+      "followers": 0,
+      "following": 0
     }
   }, {
     "id": "eead-43f1-9fd0-a88d5eb8a045",
@@ -13,7 +15,9 @@
     "created_at": "2022-01-26T20:40:40.734Z",
     "user": {
       "login": "Ciri",
-      "avatar_url": "/assets/ciri.jpg"
+      "avatar_url": "/assets/ciri.jpg",
+      "followers": 0,
+      "following": 0
     }
   }, {
     "id": "e0be-43f1-9fd0-a88d5eb8a045",
@@ -21,7 +25,9 @@
     "created_at": "2022-01-26T20:37:40.734Z",
     "user": {
       "login": "Geralt",
-      "avatar_url": "/assets/geralt.jpg"
+      "avatar_url": "/assets/geralt.jpg",
+      "followers": 0,
+      "following": 0
     }
   }]
 }
