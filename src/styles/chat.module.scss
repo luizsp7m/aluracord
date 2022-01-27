@@ -93,12 +93,22 @@
   display: flex;
   align-items: center;
   gap: 1.2rem;
+  position: relative;
 
   img {
     height: 34px;
     width: 34px;
     border-radius: 50%;
     object-fit: cover;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:hover + span {
+      text-decoration: underline;
+    }
   }
 
   span {
@@ -108,6 +118,79 @@
 
   time {
     font-size: 1.2rem;
+    color: #a0aec0;
+  }
+}
+
+.popover {
+  background: #222f3e;
+  left: 4.5rem;
+  border-radius: 0.8rem;
+  position: absolute;
+  padding: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  p {
+    font-size: 1.2rem;
+    color: #e2e8f0;
+    line-height: 3.2rem;
+  }
+
+  &::before {
+    position: absolute;
+    left: -0.3rem;
+    // border-radius: 40%;
+    content: "";
+    height: 1.6rem;
+    width: 1.6rem;
+    background: #222f3e;
+    transform: rotate(45deg);
+  }
+}
+
+.popoverImage {
+  img {
+    height: 5.5rem;
+    width: 5.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.popoverBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  span {
+    font-size: 1.6rem;
+    color: #edf2f7;
+  }
+}
+
+.popoverFooter {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.4rem;
+    color: #718096;
+  }
+}
+
+.githubProfile {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+
+  label {
+    font-size: 1.4rem;
     color: #a0aec0;
   }
 }
@@ -126,6 +209,7 @@
   gap: 0.6rem;
   display: flex;
   align-items: center;
+  height: 4.8rem;
 
   button {
     display: flex;
@@ -175,5 +259,42 @@
       font-weight: bold;
       color: #e2e8f0;
     }
+  }
+}
+
+.loadingWrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  border: 3px solid #2b6cb0;
+  border-bottom-color: transparent;
+  animation: spin 2s linear infinite;
+}
+
+.delete {
+  height: 1.4rem;
+  width: 1.4rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 665px) {
+  .popover {
+    display: none;
   }
 }

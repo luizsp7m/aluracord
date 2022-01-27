@@ -3,20 +3,20 @@ import styles from "../styles/home.module.scss";
 
 import { FormEvent, useEffect, useState } from "react";
 import { useDebounce } from "../utils/useDebounce";
-import { useAuth } from "../contexts/AuthContext";
 import { FiUsers } from "react-icons/fi";
+import { GetServerSideProps } from "next";
+import { parseCookies, setCookie } from "nookies";
+import { User } from "../types";
+import { api } from "../services/api";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  const { user, getUser, login } = useAuth();
-
+  const [user, setUser] = useState<User>(null);
   const [username, setUsername] = useState("");
   const [usernameDisplay, setUsernameDisplay] = useState(username);
   const [error, setError] = useState(null);
 
-  function onLogin(event: FormEvent) {
-    event.preventDefault();
-    login({ onError });
-  }
+  const router = useRouter();
 
   const debouncedChange = useDebounce(setUsername, 750);
 
@@ -26,16 +26,42 @@ export default function Home() {
     setError(null);
   }
 
+  function onLogin(event: FormEvent) {
+    event.preventDefault();
+
+    if (!user) {
+      onError("Usuário inválido");
+      return;
+    }
+
+    setCookie(null, "alurawitcher_user", user.login, {
+      maxAge: 86400 * 30,
+      path: "/",
+    });
+
+    router.push("/chat");
+  }
+
   function onError(message: string) {
     setError(message);
 
-    setTimeout(() => {
-      setError(null);
+    window.setTimeout(() => {
+      setError(null)
     }, 4000);
   }
 
   useEffect(() => {
-    getUser({ username, onError });
+    if (username.trim() === "") {
+      setUser(null);
+      return;
+    }
+
+    api.get(`/${username}`).then(response => {
+      setUser(response.data);
+    }).catch(error => {
+      onError(error.message);
+      setUser(null);
+    })
   }, [username]);
 
   return (
@@ -91,4 +117,23 @@ export default function Home() {
       </div>
     </>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = parseCookies(context);
+
+  if (cookies.alurawitcher_user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/chat",
+      }
+    }
+  }
+
+  return {
+    props: {
+
+    }
+  }
 }
