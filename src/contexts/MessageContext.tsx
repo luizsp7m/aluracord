@@ -1,4 +1,4 @@
-import { createContext, ReactChild, useContext, useState } from "react";
+import { createContext, ReactChild, useContext, useEffect, useState } from "react";
 import { Message } from "../types";
 
 import data from "../data.json";
@@ -16,14 +16,12 @@ interface MessageProviderProps {
 const MessageContext = createContext({} as MessageContextData);
 
 export function MessageProvider({ children }: MessageProviderProps) {
-  const [messages, setMessages] = useState<Message[]>(data.messages);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   function createMessage(message: Message) {
-    // const updateMessages = [...messages];
-    // updateMessages.push(message);
-    // setMessages(updateMessages);
     const updateMessages = [message, ...messages];
     setMessages(updateMessages);
+    localStorage.setItem("@alurawitcher:messages", JSON.stringify(updateMessages));
   }
 
   function deleteMessage(id: string) {
@@ -31,7 +29,19 @@ export function MessageProvider({ children }: MessageProviderProps) {
     const messageIndex = updateMessages.findIndex(message => message.id === id);
     updateMessages.splice(messageIndex, 1);
     setMessages(updateMessages);
+    localStorage.setItem("@alurawitcher:messages", JSON.stringify(updateMessages));
   }
+
+  useEffect(() => {
+    const storageMessages = localStorage.getItem("@alurawitcher:messages");
+
+    if(storageMessages) {
+      setMessages(JSON.parse(storageMessages));
+      return;
+    }
+
+    setMessages(data.messages);
+  }, []);
   
   return (
     <MessageContext.Provider value={{

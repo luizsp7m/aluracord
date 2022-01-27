@@ -8,9 +8,14 @@ interface GetUserProps {
   onError: (message: string) => void;
 }
 
+interface LoginProps {
+  onError: (message: string) => void;
+}
+
 interface AuthContextData {
   user: User;
-  getUser: ({ username }: GetUserProps) => Promise<void>;
+  getUser: ({ username, onError }: GetUserProps) => Promise<void>;
+  login: ({ onError }: LoginProps) => void;
   logout: () => void;
 }
 
@@ -24,6 +29,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
 
   const router = useRouter();
+
+  function login({ onError }: LoginProps) {
+    if (user) {
+      localStorage.setItem("@alurawitcher:user", JSON.stringify(user));
+      router.push("/chat");
+    } else {
+      onError("Usuário inválido");
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("@alurawitcher:user");
+    setUser(null);
+    router.push("/");
+  }
 
   async function getUser({ username, onError }: GetUserProps) {
     if (username === "") {
@@ -41,14 +61,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  function logout() {
-    setUser(null);
-    router.push("/");
-  }
+  useEffect(() => {
+    if (router.asPath === "/") {
+      localStorage.removeItem("@alurawitcher:user");
+      setUser(null);
+    }
+
+    const storageUser = localStorage.getItem("@alurawitcher:user");
+    setUser(JSON.parse(storageUser));
+  }, []);
 
   return (
     <AuthContext.Provider value={{
-      user, getUser, logout,
+      user, getUser, login, logout
     }}>
       {children}
     </AuthContext.Provider>

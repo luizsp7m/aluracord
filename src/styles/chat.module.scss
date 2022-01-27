@@ -49,9 +49,6 @@
   border-radius: 0.4rem;
   display: flex;
   flex-direction: column-reverse;
-  
-  // gap: 3.2rem;
-  // padding: 1.6rem;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -138,6 +135,11 @@
     padding: 1rem;
     border-radius: 50%;
     background: none;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   input {
@@ -149,6 +151,10 @@
     border: none;
     background: #2d3748;
     color: #cbd5e0;
+
+    &::placeholder {
+      color: #718096;
+    }
   }
 }
 

@@ -71,7 +71,7 @@ function MessageItem({ id, content, created_at, user }: MessageProps) {
   const { deleteMessage } = useMessage();
   const { user: { login } } = useAuth();
 
-  const dateFormatted = format(new Date(created_at), "HH:mm");
+  const dateFormatted = format(new Date(created_at), "dd/MM/yyyy HH:mm");
 
   return (
     <div className={styles.message}>
@@ -116,13 +116,14 @@ function InputMessage() {
   return (
     <form onSubmit={onCreateMessage} className={styles.inputMessage}>
       <input
+        placeholder="Digite uma mensagem aqui"
         type="text"
         value={message}
         onChange={({ target }) => setMessage(target.value)}
       />
 
       <button type="submit">
-        <IoMdSend size={28} color="#E2E8F0" />
+        <IoMdSend size={`2.8rem`} color="#E2E8F0" />
       </button>
     </form>
   );
