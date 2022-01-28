@@ -13,3 +13,8 @@ export interface Message {
   created_at: string;
   sender: string;
 }
+
+export interface Sticker {
+  id: number;
+  url: string;
+}

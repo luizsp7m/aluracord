@@ -1,0 +1,25 @@
+.messageList {
+  background: #2d3748;
+  height: 70vh;
+  overflow-y: auto;
+  border-radius: 0.4rem;
+  display: flex;
+  flex-direction: column-reverse;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #718096;
+    border-radius: 0.4rem;
+  }
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

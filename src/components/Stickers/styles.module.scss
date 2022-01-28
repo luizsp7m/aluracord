@@ -1,0 +1,63 @@
+.container {
+  position: absolute;
+  right: 0;
+  bottom: 6rem;
+  right: 2rem;
+  background: #1e272e;
+  border-radius: 0.8rem;
+  padding: 1.6rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+
+  h1 {
+    color: #e2e8f0;
+    font-size: 1.6rem;
+    cursor: default;
+  }
+}
+
+.stickers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  overflow-y: auto;
+  height: 22rem;
+  border-radius: 0.4rem;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  img {
+    width: 14rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .stickers {
+    height: 20rem;
+
+    img {
+      width: 12rem;
+      height: 6.75rem;
+    }
+  }
+}

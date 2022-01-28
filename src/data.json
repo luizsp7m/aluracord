@@ -1,33 +1,39 @@
 {
-  "messages": [{
-    "id": "e09f-43f1-9fd0-a88d5eb8a045",
-    "content": "Aenean tristique tellus in magna cursus, in sodales ex commodo",
-    "created_at": "2022-01-26T20:41:40.734Z",
-    "user": {
-      "login": "Ciri",
-      "avatar_url": "/assets/ciri.jpg",
-      "followers": 0,
-      "following": 0
-    }
+  "stickers": [{
+    "id": 1,
+    "url": "/stickers/1.gif"
   }, {
-    "id": "eead-43f1-9fd0-a88d5eb8a045",
-    "content": "In lobortis ante sed turpis mollis, in lobortis ante accumsan. Ut sed ultrices mi. Morbi vestibulum orci dui, at suscipit odio laoreet eu",
-    "created_at": "2022-01-26T20:40:40.734Z",
-    "user": {
-      "login": "Ciri",
-      "avatar_url": "/assets/ciri.jpg",
-      "followers": 0,
-      "following": 0
-    }
+    "id": 2,
+    "url": "/stickers/2.gif"
   }, {
-    "id": "e0be-43f1-9fd0-a88d5eb8a045",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere turpis urna, a dignissim libero commodo in. Duis mattis dictum porta. Nullam ut neque sollicitudin, vulputate ex sit amet, condimentum dui.",
-    "created_at": "2022-01-26T20:37:40.734Z",
-    "user": {
-      "login": "Geralt",
-      "avatar_url": "/assets/geralt.jpg",
-      "followers": 0,
-      "following": 0
-    }
+    "id": 3,
+    "url": "/stickers/3.gif"
+  }, {
+    "id": 4,
+    "url": "/stickers/4.gif"
+  }, {
+    "id": 5,
+    "url": "/stickers/5.gif"
+  }, {
+    "id": 6,
+    "url": "/stickers/6.gif"
+  }, {
+    "id": 7,
+    "url": "/stickers/7.gif"
+  }, {
+    "id": 8,
+    "url": "/stickers/8.gif"
+  }, {
+    "id": 9,
+    "url": "/stickers/9.gif"
+  }, {
+    "id": 10,
+    "url": "/stickers/10.gif"
+  }, {
+    "id": 11,
+    "url": "/stickers/11.gif"
+  }, {
+    "id": 12,
+    "url": "/stickers/12.gif"
   }]
 }

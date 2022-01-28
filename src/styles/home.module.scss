@@ -19,10 +19,12 @@
   gap: 2.8rem;
   border-radius: 0.8rem;
   background: #1a202c;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .welcome {
   text-align: center;
+  cursor: default;
 
   h1 {
     font-size: 2.4rem;
@@ -41,7 +43,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1.6rem;
-  // height: 21.6rem;
+  cursor: default;
   width: 90%;
 
   img {
@@ -100,32 +102,16 @@
       color: #f56565;
       font-size: 1.2rem;
       font-weight: normal;
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
     }
   }
 
-  input,
   button {
     height: 3.6rem;
     border: 0;
     outline: 0;
     border-radius: 0.4rem;
     color: #edf2f7;
-  }
-
-  input {
-    padding: 0 1.2rem;
-    font-size: 1.4rem;
-    background: #2d3748;
-    transition: background 0.2s ease-in-out;
-    border: 1px solid transparent;
-
-    &:focus {
-      background: #171923;
-    }
-  }
-
-  button {
     background: #e53e3e;
     font-weight: 500;
     font-size: 1.4rem;
@@ -138,5 +124,39 @@
     &:disabled {
       cursor: not-allowed;
     }
+  }
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  border-radius: 0.4rem;
+  padding-right: 1.2rem;
+  border: 1px solid transparent;
+  background: #2d3748;
+
+  input {
+    height: 3.6rem;
+    border: 0;
+    outline: 0;
+    border-radius: 0.4rem;
+    color: #edf2f7;
+    padding: 0 1.2rem;
+    font-size: 1.4rem;
+    background: #2d3748;
+    flex: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }

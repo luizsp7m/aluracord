@@ -1,0 +1,92 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: 1.6rem;
+  transition: background 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 1.6rem;
+    top: 1.6rem;
+    font-size: 0;
+    border: 0;
+    background: none;
+    border-radius: 50%;
+    display: none;
+  }
+
+  &:hover {
+    background: #4a5568;
+
+    button {
+      display: flex;
+    }
+  }
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  position: relative;
+
+  img {
+    height: 3.4rem;
+    width: 3.4rem;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  span {
+    font-size: 1.6rem;
+    color: #e2e8f0;
+  }
+
+  time {
+    font-size: 1.2rem;
+    color: #a0aec0;
+  }
+}
+
+@media (max-width: 500px) {
+  .messageHeader {
+    span {
+      white-space: nowrap;
+      max-width: 10ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.messageBody {
+  img {
+    width: 32rem;
+    height: 18rem;
+    object-fit: cover;
+    border-radius: 0.4rem;
+  }
+
+  p {
+    color: #cbd5e0;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+  }
+}
+
+@media (max-width: 475px) {
+  .messageBody {
+    img {
+      width: 16rem;
+      height: 9rem;
+    }
+  }
+}

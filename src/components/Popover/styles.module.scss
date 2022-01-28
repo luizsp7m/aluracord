@@ -1,0 +1,77 @@
+.popover {
+  background: #222f3e;
+  left: 4.5rem;
+  border-radius: 0.8rem;
+  position: absolute;
+  padding: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  p {
+    font-size: 1.2rem;
+    color: #e2e8f0;
+    line-height: 3.2rem;
+  }
+
+  &::before {
+    position: absolute;
+    left: -0.3rem;
+    content: "";
+    height: 1.6rem;
+    width: 1.6rem;
+    background: #222f3e;
+    transform: rotate(45deg);
+  }
+}
+
+.popoverImage {
+  img {
+    height: 5.5rem;
+    width: 5.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.popoverBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  span {
+    font-size: 1.6rem;
+    color: #edf2f7;
+  }
+}
+
+.popoverFooter {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.4rem;
+    color: #718096;
+  }
+}
+
+.githubProfile {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+
+  label {
+    font-size: 1.4rem;
+    color: #a0aec0;
+  }
+}
+
+@media (max-width: 690px) {
+  .popover {
+    display: none;
+  }
+}

@@ -4,8 +4,9 @@ import { createClient } from "@supabase/supabase-js";
 
 interface MessageContextData {
   messages: Message[];
-  loadingSubmitMessage: boolean;
-  loadingMessages: boolean;
+  submitMessageIsLoading: boolean;
+  submitStickerIsLoading: boolean;
+  messagesIsLoading: boolean;
   createMessage: (message: CreateMessageProps) => Promise<void>;
   deleteMessage: ({ changeLoading, id }: DeleteMessageProps) => Promise<void>;
 }
@@ -17,6 +18,7 @@ interface MessageProviderProps {
 interface CreateMessageProps {
   content: string;
   sender: string;
+  type: string;
 }
 
 interface DeleteMessageProps {
@@ -30,19 +32,28 @@ const supabaseClient = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, proces
 
 export function MessageProvider({ children }: MessageProviderProps) {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [loadingSubmitMessage, setLoadingSubmitMessage] = useState(false);
-  const [loadingMessages, setLoadingMessages] = useState(true);
+  const [submitMessageIsLoading, setSubmitMessageIsLoading] = useState(false);
+  const [submitStickerIsLoading, setSubmitStickerIsLoading] = useState(false);
+  const [messagesIsLoading, setMessagesIsLoading] = useState(true);
 
   async function createMessage(message: CreateMessageProps) {
-    setLoadingSubmitMessage(true);
+    if (message.type === "text") {
+      setSubmitMessageIsLoading(true);
+    } else {
+      setSubmitStickerIsLoading(true);
+    }
+
     supabaseClient.from("messages")
-      .insert([message])
-      .then(({ data }) => {
-        setMessages(prevMessages => {
-          const newMessages = [data[0], ...prevMessages];
-          return newMessages;
-        });
-        setLoadingSubmitMessage(false);
+      .insert([{
+        content: message.content,
+        sender: message.sender,
+      }])
+      .then(() => {
+        if (message.type === "text") {
+          setSubmitMessageIsLoading(false);
+        } else {
+          setSubmitStickerIsLoading(false);
+        }
       })
   }
 
@@ -52,17 +63,13 @@ export function MessageProvider({ children }: MessageProviderProps) {
       .from("messages")
       .delete()
       .match({ id })
-      .then(({ data }) => {
-        setMessages(prevMessages => {
-          const newMessages = prevMessages.filter(message => message.id !== data[0].id);
-          return newMessages;
-        });
+      .then(() => {
         changeLoading(false);
       });
   }
 
   useEffect(() => { // Primeira renderização da página
-    setLoadingMessages(true);
+    setMessagesIsLoading(true);
     supabaseClient
       .from("messages")
       .select("*")
@@ -73,14 +80,44 @@ export function MessageProvider({ children }: MessageProviderProps) {
         }
 
         window.setTimeout(() => {
-          setLoadingMessages(false);
+          setMessagesIsLoading(false);
         }, 1500);
       })
   }, []);
 
+  useEffect(() => {
+    supabaseClient
+      .from("messages")
+      .on("*", payload => {
+        if (payload.eventType === "DELETE") {
+          setMessages(prevMessages => {
+            // const newMessages = prevMessages.filter(message => message.id !== payload.old.id);
+            // return newMessages;
+            const oldMessage = payload.old;
+            const oldMessageIndex = prevMessages.findIndex(message => message.id === oldMessage.id);
+            const newMessages = [...prevMessages];
+            newMessages.splice(oldMessageIndex, 1);
+            return newMessages;
+          })
+          return;
+        }
+
+        setMessages(prevMessages => {
+          const newMessage = payload.new;
+          const newMessages = [newMessage, ...prevMessages];
+          return newMessages;
+        });
+      })
+      .subscribe();
+
+    // return () => {
+    //   messagesListener.unsubscribe();
+    // }
+  }, []);
+
   return (
     <MessageContext.Provider value={{
-      messages, createMessage, loadingSubmitMessage, deleteMessage, loadingMessages
+      messages, createMessage, submitMessageIsLoading, deleteMessage, messagesIsLoading, submitStickerIsLoading
     }}>
       {children}
     </MessageContext.Provider>

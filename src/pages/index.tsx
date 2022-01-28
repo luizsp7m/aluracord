@@ -9,12 +9,14 @@ import { parseCookies, setCookie } from "nookies";
 import { User } from "../types";
 import { api } from "../services/api";
 import { useRouter } from "next/router";
+import { Spinner } from "../components/Spinner";
 
 export default function Home() {
   const [user, setUser] = useState<User>(null);
   const [username, setUsername] = useState("");
   const [usernameDisplay, setUsernameDisplay] = useState(username);
   const [error, setError] = useState(null);
+  const [githubUserIsLoading, setGithubUserIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -53,15 +55,19 @@ export default function Home() {
   useEffect(() => {
     if (username.trim() === "") {
       setUser(null);
+      setGithubUserIsLoading(false);
       return;
     }
 
+    setGithubUserIsLoading(true);
     api.get(`/${username}`).then(response => {
       setUser(response.data);
     }).catch(error => {
       onError(error.message);
       setUser(null);
-    })
+    }).finally(() => {
+      setGithubUserIsLoading(false);
+    });
   }, [username]);
 
   return (
@@ -99,19 +105,24 @@ export default function Home() {
               <h6>{error}</h6>
             </span>
 
-            <input
-              id="username"
-              type="text"
-              value={usernameDisplay}
-              onChange={({ target }) => onChangeUsername(target.value)}
-              style={{
-                borderColor: error ? "#F56565" : ""
-              }}
-            />
+            <div className={styles.inputGroup} style={{
+              borderColor: error ? "#F56565" : ""
+            }}>
+              <input
+                type="text"
+                value={usernameDisplay}
+                onChange={({ target }) => onChangeUsername(target.value)}
+                autoComplete="nope"
+              />
+
+              {githubUserIsLoading && <Spinner sm={true} />}
+            </div>
 
             <button
               type="submit"
-              disabled={username.length <= 0 ? true : false}>Log In</button>
+              disabled={githubUserIsLoading}>
+              Log In
+            </button>
           </form>
         </div>
       </div>

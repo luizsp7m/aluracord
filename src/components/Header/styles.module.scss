@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-size: 2.4rem;
+    color: #edf2f7;
+    cursor: default;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+
+    img {
+      height: 3.4rem;
+      width: 3.4rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    span {
+      font-size: 1.4rem;
+      color: #cbd5e0;
+      transition: color 0.2s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        color: #e2e8f0;
+      }
+    }
+  }
+}

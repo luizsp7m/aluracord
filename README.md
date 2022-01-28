@@ -6,8 +6,24 @@ Outras mudanças em relação a aplicação original são:
 - Typescript
 - Utilização da API do Github para verificar se um usuário existe ou não
 - Prevenção de múltiplas requisições com Debounce
-- Usuário e mensagens salvas no localStorage
-- Apenas usuários autenticados podem acessar o chat
+- Sessão do usuário salva no cookies
+- Loadings
 
 ![](./public/design/login-preview.png)
 ![](./public/design/chat-preview.png)
+
+### Funcionalidades
+
+- Log In com qualquer usuário do Github
+- Enviar mensagens
+- Enviar GIF's
+- Excluir mensagens / GIF's
+- Chat em realtime
+- Logout
+
+#### Tecnologias:
+
+- Next.js
+- Typescript
+- SCSS
+- Supabase
