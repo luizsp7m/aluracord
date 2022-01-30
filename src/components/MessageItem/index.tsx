@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useMessage } from "../../contexts/MessageContext";
 import { Message } from "../../types";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { BiPencil } from "react-icons/bi";
 import { Popover } from "../Popover";
 import { Spinner } from "../Spinner";
 
@@ -19,6 +20,7 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
 
   const [deleteMessageIsLoading, setDeleteMessageIsLoading] = useState(false);
   const [openPopover, setOpenPopover] = useState(false);
+  const [inputEditMessageIsOpen, setInputMessageIsOpen] = useState(true);
 
   function changeLoading(value: boolean) {
     setDeleteMessageIsLoading(value);
@@ -28,6 +30,10 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
     deleteMessage({
       id: message.id, changeLoading,
     });
+  }
+
+  function onEditMessage() {
+    alert("Vai ser implementado ainda 👀");
   }
 
   const dateFormatted = format(new Date(message.created_at), "dd/MM/yyyy HH:mm");
@@ -58,9 +64,17 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
           <img src={message.content.replace(":sticker: ", "")} alt="Sticker" /> : <p>{message.content}</p>}
       </div>
 
-      {message.sender === user_session && <button disabled={deleteMessageIsLoading} onClick={onDeleteMessage}>
-        {deleteMessageIsLoading ? <Spinner sm={true} /> : <MdOutlineDeleteOutline size={18} color="#E53E3E" />}
-      </button>}
+      {message.sender === user_session && (
+        <div className={styles.buttonGroup}>
+          {!message.content.startsWith(":sticker:") && <button>
+            <BiPencil onClick={onEditMessage} size={18} color="#CBD5E0" />
+          </button>}
+
+          <button disabled={deleteMessageIsLoading} onClick={onDeleteMessage}>
+            {deleteMessageIsLoading ? <Spinner sm={true} /> : <MdOutlineDeleteOutline size={18} color="#CBD5E0" />}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

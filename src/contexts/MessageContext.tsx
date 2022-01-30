@@ -86,33 +86,35 @@ export function MessageProvider({ children }: MessageProviderProps) {
   }, []);
 
   useEffect(() => {
-    supabaseClient
-      .from("messages")
-      .on("*", payload => {
-        if (payload.eventType === "DELETE") {
-          setMessages(prevMessages => {
-            // const newMessages = prevMessages.filter(message => message.id !== payload.old.id);
-            // return newMessages;
-            const oldMessage = payload.old;
-            const oldMessageIndex = prevMessages.findIndex(message => message.id === oldMessage.id);
-            const newMessages = [...prevMessages];
-            newMessages.splice(oldMessageIndex, 1);
-            return newMessages;
-          })
-          return;
-        }
-
-        setMessages(prevMessages => {
+    const messagesListener = supabaseClient.from("messages").on("*", payload => {
+      if (payload.eventType === "INSERT") {
+        setMessages(oldMessages => {
           const newMessage = payload.new;
-          const newMessages = [newMessage, ...prevMessages];
-          return newMessages;
+          const updatedMessages = [newMessage, ...oldMessages];
+          return updatedMessages;
         });
-      })
-      .subscribe();
 
-    // return () => {
-    //   messagesListener.unsubscribe();
-    // }
+        return;
+      }
+
+      if (payload.eventType === "UPDATE") {
+        return;
+      }
+
+      if (payload.eventType === "DELETE") {
+        setMessages(oldMessages => {
+          const oldMessage = payload.old;
+          const updatedMessages = oldMessages.filter(message => message.id !== oldMessage.id);
+          return updatedMessages;
+        });
+
+        return;
+      }
+    }).subscribe();
+
+    return () => {
+      messagesListener.unsubscribe();
+    };
   }, []);
 
   return (

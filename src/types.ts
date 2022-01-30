@@ -12,6 +12,7 @@ export interface Message {
   content: string;
   created_at: string;
   sender: string;
+  updated: boolean;
 }
 
 export interface Sticker {

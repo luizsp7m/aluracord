@@ -7,21 +7,10 @@
   cursor: pointer;
   position: relative;
 
-  button {
-    position: absolute;
-    right: 1.6rem;
-    top: 1.6rem;
-    font-size: 0;
-    border: 0;
-    background: none;
-    border-radius: 50%;
-    display: none;
-  }
-
   &:hover {
     background: #4a5568;
 
-    button {
+    .buttonGroup {
       display: flex;
     }
   }
@@ -56,17 +45,6 @@
   }
 }
 
-@media (max-width: 500px) {
-  .messageHeader {
-    span {
-      white-space: nowrap;
-      max-width: 10ch;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-}
-
 .messageBody {
   img {
     width: 32rem;
@@ -79,6 +57,46 @@
     color: #cbd5e0;
     font-size: 1.4rem;
     line-height: 2.4rem;
+  }
+}
+
+.buttonGroup {
+  display: none;
+  position: absolute;
+  right: 1.6rem;
+  top: 1.6rem;
+  padding: 0.6rem;
+  gap: 1.2rem;
+  border-radius: 0.4rem;
+  background: #2d3748;
+
+  button {
+    font-size: 0;
+    border: 0;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 2.2rem;
+    height: 2.2rem;
+
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .messageHeader {
+    span {
+      white-space: nowrap;
+      max-width: 10ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 

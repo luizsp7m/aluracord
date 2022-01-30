@@ -16,17 +16,24 @@ export function Popover({ username }: PopoverProps) {
   const [githubUserIsLoading, setGithubUserIsLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
     setGithubUserIsLoading(true);
 
     api.get(`/${username}`).then(response => {
-      setGithubUser(response.data);
+      if (mounted) {
+        setGithubUser(response.data);
+      }
     }).catch(error => {
-      setGithubUser(null);
+      if (mounted) {
+        setGithubUser(null);
+      }
     }).finally(() => {
       window.setTimeout(() => {
         setGithubUserIsLoading(false);
       }, 750);
     });
+
+    return () => { mounted = false }
   }, []);
 
   return (
