@@ -8,7 +8,8 @@ interface MessageContextData {
   submitStickerIsLoading: boolean;
   messagesIsLoading: boolean;
   createMessage: (message: CreateMessageProps) => Promise<void>;
-  deleteMessage: ({ changeLoading, id }: DeleteMessageProps) => Promise<void>;
+  deleteMessage: ({ onLoadingDelete, id }: DeleteMessageProps) => Promise<void>;
+  updateMessage: (message: UpdateMessageProps) => Promise<void>;
 }
 
 interface MessageProviderProps {
@@ -21,9 +22,16 @@ interface CreateMessageProps {
   type: string;
 }
 
+interface UpdateMessageProps {
+  id: string;
+  content: string;
+  closeInputMessage: () => void;
+  onLoadingUpdate: (value: boolean) => void;
+}
+
 interface DeleteMessageProps {
   id: string;
-  changeLoading: (value: boolean) => void;
+  onLoadingDelete: (value: boolean) => void;
 }
 
 const MessageContext = createContext({} as MessageContextData);
@@ -57,14 +65,30 @@ export function MessageProvider({ children }: MessageProviderProps) {
       })
   }
 
-  async function deleteMessage({ id, changeLoading }: DeleteMessageProps) {
-    changeLoading(true);
+  async function updateMessage({ id, content, closeInputMessage, onLoadingUpdate }: UpdateMessageProps) {
+    onLoadingUpdate(true);
+
+    supabaseClient.from("messages")
+      .update({
+        content: content,
+        updated: true,
+      })
+      .match({ id })
+      .then(() => {
+        onLoadingUpdate(false);
+        closeInputMessage();
+      })
+  }
+
+  async function deleteMessage({ id, onLoadingDelete }: DeleteMessageProps) {
+    onLoadingDelete(true);
+
     supabaseClient
       .from("messages")
       .delete()
       .match({ id })
       .then(() => {
-        changeLoading(false);
+        onLoadingDelete(false);
       });
   }
 
@@ -98,6 +122,18 @@ export function MessageProvider({ children }: MessageProviderProps) {
       }
 
       if (payload.eventType === "UPDATE") {
+        setMessages(oldMessages => {
+          const newMessage = payload.new;
+          const oldMessage = payload.old;
+
+          const updatedMessages = [...oldMessages];
+          const messageIndex = updatedMessages.findIndex(message => message.id === oldMessage.id);
+          updatedMessages[messageIndex].content = newMessage.content;
+          updatedMessages[messageIndex].updated = newMessage.updated;
+
+          return updatedMessages;
+        });
+
         return;
       }
 
@@ -119,7 +155,7 @@ export function MessageProvider({ children }: MessageProviderProps) {
 
   return (
     <MessageContext.Provider value={{
-      messages, createMessage, submitMessageIsLoading, deleteMessage, messagesIsLoading, submitStickerIsLoading
+      messages, createMessage, submitMessageIsLoading, deleteMessage, messagesIsLoading, submitStickerIsLoading, updateMessage
     }}>
       {children}
     </MessageContext.Provider>

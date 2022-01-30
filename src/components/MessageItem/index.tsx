@@ -2,10 +2,11 @@ import styles from "./styles.module.scss";
 import format from "date-fns/format";
 import Link from "next/link";
 
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useMessage } from "../../contexts/MessageContext";
 import { Message } from "../../types";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { IoIosClose } from "react-icons/io";
 import { BiPencil } from "react-icons/bi";
 import { Popover } from "../Popover";
 import { Spinner } from "../Spinner";
@@ -16,27 +17,50 @@ interface MessageItemProps {
 }
 
 export function MessageItem({ message, user_session }: MessageItemProps) {
-  const { deleteMessage } = useMessage();
+  const { deleteMessage, updateMessage } = useMessage();
 
   const [deleteMessageIsLoading, setDeleteMessageIsLoading] = useState(false);
   const [openPopover, setOpenPopover] = useState(false);
-  const [inputEditMessageIsOpen, setInputMessageIsOpen] = useState(true);
+  const [inputEditMessageIsOpen, setInputMessageIsOpen] = useState(false);
+  const [messageContent, setMessageContent] = useState(message.content);
+  const [messageUpdateIsLoading, setMessageUpdateIsLoading] = useState(false);
 
-  function changeLoading(value: boolean) {
+  function onLoadingDelete(value: boolean) {
     setDeleteMessageIsLoading(value);
   }
 
   function onDeleteMessage() {
     deleteMessage({
-      id: message.id, changeLoading,
+      id: message.id, onLoadingDelete,
     });
   }
 
-  function onEditMessage() {
-    alert("Vai ser implementado ainda 👀");
+  function closeInputMessage() {
+    setInputMessageIsOpen(false);
   }
 
-  const dateFormatted = format(new Date(message.created_at), "dd/MM/yyyy HH:mm");
+  function onLoadingUpdate(value: boolean) {
+    setMessageUpdateIsLoading(value);
+  }
+
+  async function onEditMessage(event: FormEvent) {
+    event.preventDefault();
+
+    if (messageContent.trim() === "") return;
+
+    updateMessage({
+      id: message.id,
+      content: messageContent,
+      closeInputMessage,
+      onLoadingUpdate,
+    });
+  }
+
+  useEffect(() => {
+    setMessageContent(message.content);
+  }, [inputEditMessageIsOpen]);
+
+  const dateFormatted = format(new Date(message.created_at), `dd MMM. yyyy - HH:mm`);
 
   return (
     <div className={styles.message}>
@@ -53,6 +77,7 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
         </Link>
         <span>{message.sender}</span>
         <time>{dateFormatted}</time>
+        {message.updated && <label>Editada</label>}
 
         {openPopover && (
           <Popover username={message.sender} />
@@ -61,18 +86,27 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
 
       <div className={styles.messageBody}>
         {message.content.startsWith(":sticker:") ?
-          <img src={message.content.replace(":sticker: ", "")} alt="Sticker" /> : <p>{message.content}</p>}
+          <img src={message.content.replace(":sticker: ", "")} alt="Sticker" /> : inputEditMessageIsOpen ? <form onSubmit={onEditMessage} className={styles.editMessage}>
+            <input
+              type="text"
+              value={messageContent}
+              onChange={({ target }) => setMessageContent(target.value)}
+              disabled={messageUpdateIsLoading}
+            />
+
+            <button disabled={messageUpdateIsLoading} type="submit">{messageUpdateIsLoading ? <Spinner sm={true} /> : "Salvar"}</button>
+          </form> : <p>{message.content}</p>}
       </div>
 
       {message.sender === user_session && (
         <div className={styles.buttonGroup}>
-          {!message.content.startsWith(":sticker:") && <button>
-            <BiPencil onClick={onEditMessage} size={18} color="#CBD5E0" />
+          {!message.content.startsWith(":sticker:") && !deleteMessageIsLoading && <button onClick={() => setInputMessageIsOpen(!inputEditMessageIsOpen)}>
+            {inputEditMessageIsOpen ? <IoIosClose size={22} color="#CBD5E0" /> : <BiPencil size={18} color="#CBD5E0" />}
           </button>}
 
-          <button disabled={deleteMessageIsLoading} onClick={onDeleteMessage}>
+          {!inputEditMessageIsOpen && <button disabled={deleteMessageIsLoading} onClick={onDeleteMessage}>
             {deleteMessageIsLoading ? <Spinner sm={true} /> : <MdOutlineDeleteOutline size={18} color="#CBD5E0" />}
-          </button>
+          </button>}
         </div>
       )}
     </div>

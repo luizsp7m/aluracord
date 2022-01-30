@@ -43,6 +43,12 @@
     font-size: 1.2rem;
     color: #a0aec0;
   }
+
+  label {
+    font-size: 1rem;
+    color: #a0aec0;
+    font-weight: 500;
+  }
 }
 
 .messageBody {
@@ -85,6 +91,47 @@
 
     &:hover {
       opacity: 0.5;
+    }
+  }
+}
+
+.editMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.2rem;
+
+  input {
+    width: 100%;
+    resize: none;
+    padding: 2rem 1.8rem;
+    outline: none;
+    border-radius: 0.4rem;
+    border: none;
+    background: rgba(0, 0, 0, 0.1);
+    color: #cbd5e0;
+    transition: background 0.2s ease-in-out;
+
+    &:focus {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  button {
+    background: #2d3748;
+    border: 0;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    color: #e2e8f0;
+    transition: opacity 0.2s ease-in-out;
+    height: 4rem;
+    width: 6.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      opacity: 0.85;
     }
   }
 }
