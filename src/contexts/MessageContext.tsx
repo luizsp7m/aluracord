@@ -43,6 +43,7 @@ export function MessageProvider({ children }: MessageProviderProps) {
   const [submitMessageIsLoading, setSubmitMessageIsLoading] = useState(false);
   const [submitStickerIsLoading, setSubmitStickerIsLoading] = useState(false);
   const [messagesIsLoading, setMessagesIsLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState("");
 
   async function createMessage(message: CreateMessageProps) {
     if (message.type === "text") {
@@ -62,6 +63,10 @@ export function MessageProvider({ children }: MessageProviderProps) {
         } else {
           setSubmitStickerIsLoading(false);
         }
+
+        const notification = new Audio();
+        notification.src = "/assets/sentmessage.mp3";
+        notification.play();
       })
   }
 
@@ -112,20 +117,30 @@ export function MessageProvider({ children }: MessageProviderProps) {
   useEffect(() => {
     const messagesListener = supabaseClient.from("messages").on("*", payload => {
       if (payload.eventType === "INSERT") {
+        const newMessage = payload.new;
+
         setMessages(oldMessages => {
-          const newMessage = payload.new;
           const updatedMessages = [newMessage, ...oldMessages];
           return updatedMessages;
         });
+
+        console.log("Usuário logado: " + "Arrumar isso aqui");
+        console.log("Usuário que enviou a nova mensagem: " + newMessage.sender);
+
+        // if (currentUser !== newMessage.sender) { // Som da notificação para todos os usuários, exceto para quem a enviou
+        //   const notification = new Audio();
+        //   notification.src = "/assets/notification.mp3";
+        //   notification.play();
+        // }
 
         return;
       }
 
       if (payload.eventType === "UPDATE") {
-        setMessages(oldMessages => {
-          const newMessage = payload.new;
-          const oldMessage = payload.old;
+        const newMessage = payload.new;
+        const oldMessage = payload.old;
 
+        setMessages(oldMessages => {
           const updatedMessages = [...oldMessages];
           const messageIndex = updatedMessages.findIndex(message => message.id === oldMessage.id);
           updatedMessages[messageIndex].content = newMessage.content;
@@ -138,8 +153,9 @@ export function MessageProvider({ children }: MessageProviderProps) {
       }
 
       if (payload.eventType === "DELETE") {
+        const oldMessage = payload.old;
+
         setMessages(oldMessages => {
-          const oldMessage = payload.old;
           const updatedMessages = oldMessages.filter(message => message.id !== oldMessage.id);
           return updatedMessages;
         });
@@ -155,7 +171,9 @@ export function MessageProvider({ children }: MessageProviderProps) {
 
   return (
     <MessageContext.Provider value={{
-      messages, createMessage, submitMessageIsLoading, deleteMessage, messagesIsLoading, submitStickerIsLoading, updateMessage
+      messages, createMessage, submitMessageIsLoading,
+      deleteMessage, messagesIsLoading, submitStickerIsLoading,
+      updateMessage,
     }}>
       {children}
     </MessageContext.Provider>

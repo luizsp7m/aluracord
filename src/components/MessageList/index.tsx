@@ -12,8 +12,13 @@ interface MessageListProps {
 export function MessageList({ user_session }: MessageListProps) {
   const { messages, messagesIsLoading } = useMessage();
 
+  useEffect(() => {
+    const scrollBar = document.querySelector("#scrollBar");
+    scrollBar.scrollTop = scrollBar.scrollHeight;
+  }, [messages]);
+
   return (
-    <div className={styles.messageList}>
+    <div id="scrollBar" className={styles.messageList}>
       {messagesIsLoading ? <div className={styles.loading}>
         <Spinner />
       </div> : messages.map(message => (

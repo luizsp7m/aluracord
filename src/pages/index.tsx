@@ -28,6 +28,14 @@ export default function Home() {
     setError(null);
   }
 
+  function onError(message: string) {
+    setError(message);
+
+    window.setTimeout(() => {
+      setError(null)
+    }, 4000);
+  }
+
   function onLogin(event: FormEvent) {
     event.preventDefault();
 
@@ -42,14 +50,6 @@ export default function Home() {
     });
 
     router.push("/chat");
-  }
-
-  function onError(message: string) {
-    setError(message);
-
-    window.setTimeout(() => {
-      setError(null)
-    }, 4000);
   }
 
   useEffect(() => {
