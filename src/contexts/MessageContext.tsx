@@ -131,7 +131,7 @@ export function MessageProvider({ children }: MessageProviderProps) {
         //   const notification = new Audio();
         //   notification.src = "/assets/notification.mp3";
         //   notification.play();
-        // }
+        // } //
 
         return;
       }
