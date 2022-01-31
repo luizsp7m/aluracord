@@ -29,5 +29,5 @@ Outras mudanças em relação a aplicação original são:
 
 - Next.js
 - Typescript
-- SCSS
+- SASS
 - Supabase
