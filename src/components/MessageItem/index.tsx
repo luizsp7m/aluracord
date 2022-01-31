@@ -77,7 +77,6 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
         </Link>
         <span>{message.sender}</span>
         <time>{dateFormatted}</time>
-        {message.updated && <h6>Editada</h6>}
 
         {openPopover && (
           <Popover username={message.sender} />
@@ -95,7 +94,7 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
             />
 
             <button disabled={messageUpdateIsLoading} type="submit">{messageUpdateIsLoading ? <Spinner sm={true} /> : "Salvar"}</button>
-          </form> : <p>{message.content}</p>}
+          </form> : <p>{message.content} {message.updated && <span>(editado)</span>}</p>}
       </div>
 
       {message.sender === user_session && (

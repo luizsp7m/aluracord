@@ -44,6 +44,10 @@ export default function Home() {
       return;
     }
 
+    const discordjoin = new Audio();
+    discordjoin.src = "/assets/discordjoin.mp3";
+    discordjoin.play();
+
     setCookie(null, "alurawitcher_user", user.login, {
       maxAge: 86400 * 30,
       path: "/",

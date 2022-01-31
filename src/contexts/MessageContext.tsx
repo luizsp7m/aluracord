@@ -81,6 +81,10 @@ export function MessageProvider({ children }: MessageProviderProps) {
       .then(() => {
         onLoadingUpdate(false);
         closeInputMessage();
+
+        const updatemessage = new Audio();
+        updatemessage.src = "/assets/success.mp3";
+        updatemessage.play();
       })
   }
 
@@ -93,6 +97,10 @@ export function MessageProvider({ children }: MessageProviderProps) {
       .match({ id })
       .then(() => {
         onLoadingDelete(false);
+
+        const deletemessage = new Audio();
+        deletemessage.src = "/assets/rapaz.mp3";
+        deletemessage.play();
       });
   }
 
@@ -127,14 +135,14 @@ export function MessageProvider({ children }: MessageProviderProps) {
 
           const { "alurawitcher_user": currentUser } = parseCookies();
 
-          if(currentUser) {
+          if (currentUser) {
             if (currentUser !== newMessage.sender) {
               const notification = new Audio();
               notification.src = "/assets/notification.mp3";
               notification.play();
               return;
             }
-  
+
             if (currentUser === newMessage.sender) {
               const scrollBar = document.querySelector("#scrollBar");
               scrollBar.scrollTop = scrollBar.scrollHeight;
