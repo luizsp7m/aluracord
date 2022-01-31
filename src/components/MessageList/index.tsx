@@ -3,7 +3,6 @@ import styles from "./styles.module.scss";
 import { useMessage } from "../../contexts/MessageContext";
 import { MessageItem } from "../MessageItem";
 import { Spinner } from "../Spinner";
-import { useEffect } from "react";
 
 interface MessageListProps {
   user_session: string;
@@ -11,11 +10,6 @@ interface MessageListProps {
 
 export function MessageList({ user_session }: MessageListProps) {
   const { messages, messagesIsLoading } = useMessage();
-
-  useEffect(() => {
-    const scrollBar = document.querySelector("#scrollBar");
-    scrollBar.scrollTop = scrollBar.scrollHeight;
-  }, [messages]);
 
   return (
     <div id="scrollBar" className={styles.messageList}>

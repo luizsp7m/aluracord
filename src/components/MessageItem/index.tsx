@@ -77,7 +77,7 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
         </Link>
         <span>{message.sender}</span>
         <time>{dateFormatted}</time>
-        {message.updated && <label>Editada</label>}
+        {message.updated && <h6>Editada</h6>}
 
         {openPopover && (
           <Popover username={message.sender} />
