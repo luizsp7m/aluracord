@@ -45,8 +45,6 @@ export function MessageProvider({ children }: MessageProviderProps) {
   const [submitMessageIsLoading, setSubmitMessageIsLoading] = useState(false);
   const [submitStickerIsLoading, setSubmitStickerIsLoading] = useState(false);
 
-  const { "alurawitcher_user": currentUser } = parseCookies();
-
   async function createMessage({ content, sender, type }: CreateMessageProps) {
     if (type === "text") {
       setSubmitMessageIsLoading(true);
@@ -127,21 +125,26 @@ export function MessageProvider({ children }: MessageProviderProps) {
             return updatedMessages;
           });
 
-          if (currentUser !== newMessage.sender) {
-            const notification = new Audio();
-            notification.src = "/assets/notification.mp3";
-            notification.play();
+          const { "alurawitcher_user": currentUser } = parseCookies();
+
+          if(currentUser) {
+            if (currentUser !== newMessage.sender) {
+              const notification = new Audio();
+              notification.src = "/assets/notification.mp3";
+              notification.play();
+              return;
+            }
+  
+            if (currentUser === newMessage.sender) {
+              const scrollBar = document.querySelector("#scrollBar");
+              scrollBar.scrollTop = scrollBar.scrollHeight;
+              return;
+            }
+
             return;
           }
-
-          if (currentUser === newMessage.sender) {
-            const scrollBar = document.querySelector("#scrollBar");
-            scrollBar.scrollTop = scrollBar.scrollHeight;
-            return;
-          }
-
-          return;
         }
+
 
         if (payload.eventType === "UPDATE") {
           const newMessage = payload.new;
