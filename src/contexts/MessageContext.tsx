@@ -131,9 +131,13 @@ export function MessageProvider({ children }: MessageProviderProps) {
             const notification = new Audio();
             notification.src = "/assets/notification.mp3";
             notification.play();
-          } else {
+            return;
+          }
+
+          if (currentUser === newMessage.sender) {
             const scrollBar = document.querySelector("#scrollBar");
             scrollBar.scrollTop = scrollBar.scrollHeight;
+            return;
           }
 
           return;

@@ -1,39 +1,39 @@
 {
   "stickers": [{
     "id": 1,
-    "url": "/stickers/1.gif"
+    "url": "/stickers/1.webp"
   }, {
     "id": 2,
-    "url": "/stickers/2.gif"
+    "url": "/stickers/2.webp"
   }, {
     "id": 3,
-    "url": "/stickers/3.gif"
+    "url": "/stickers/3.webp"
   }, {
     "id": 4,
-    "url": "/stickers/4.gif"
+    "url": "/stickers/4.webp"
   }, {
     "id": 5,
-    "url": "/stickers/5.gif"
+    "url": "/stickers/5.webp"
   }, {
     "id": 6,
-    "url": "/stickers/6.gif"
+    "url": "/stickers/6.webp"
   }, {
     "id": 7,
-    "url": "/stickers/7.gif"
+    "url": "/stickers/7.webp"
   }, {
     "id": 8,
-    "url": "/stickers/8.gif"
+    "url": "/stickers/8.webp"
   }, {
     "id": 9,
-    "url": "/stickers/9.gif"
+    "url": "/stickers/9.webp"
   }, {
     "id": 10,
-    "url": "/stickers/10.gif"
+    "url": "/stickers/10.webp"
   }, {
     "id": 11,
-    "url": "/stickers/11.gif"
+    "url": "/stickers/11.webp"
   }, {
     "id": 12,
-    "url": "/stickers/12.gif"
+    "url": "/stickers/12.webp"
   }]
 }

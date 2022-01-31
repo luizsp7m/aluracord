@@ -54,10 +54,9 @@
 
 .messageBody {
   img {
-    width: 32rem;
-    height: 18rem;
+    width: 14rem;
+    height: 14rem;
     object-fit: cover;
-    border-radius: 0.4rem;
   }
 
   p {
@@ -151,8 +150,8 @@
 @media (max-width: 475px) {
   .messageBody {
     img {
-      width: 16rem;
-      height: 9rem;
+      width: 8rem;
+      height: 8rem;
     }
   }
 }

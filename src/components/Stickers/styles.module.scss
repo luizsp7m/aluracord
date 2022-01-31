@@ -23,10 +23,10 @@
 
 .stickers {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.8rem;
   overflow-y: auto;
-  height: 22rem;
+  height: 20rem;
   border-radius: 0.4rem;
 
   &::-webkit-scrollbar {
@@ -38,10 +38,9 @@
   }
 
   img {
-    width: 14rem;
+    width: 8rem;
     height: 8rem;
     object-fit: cover;
-    border-radius: 0.4rem;
     cursor: pointer;
     transition: opacity 0.2s ease-in-out;
 
@@ -54,10 +53,11 @@
 @media (max-width: 425px) {
   .stickers {
     height: 20rem;
+    grid-template-columns: repeat(2, 1fr);
 
     img {
-      width: 12rem;
-      height: 6.75rem;
+      width: 8rem;
+      height: 8rem;
     }
   }
 }
