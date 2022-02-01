@@ -53,7 +53,7 @@ export default function Home() {
       path: "/",
     });
 
-    router.push("/chat");
+    router.push(`/chat?username=${user.login}`);
   }
 
   useEffect(() => {

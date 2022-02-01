@@ -6,6 +6,7 @@ import { MessageList } from "../components/MessageList";
 import { InputMessage } from "../components/InputMessage";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
+import { Sidebar } from "../components/Sidebar";
 
 interface ChatProps {
   user_session: string;
@@ -19,10 +20,14 @@ export default function Chat({ user_session }: ChatProps) {
       </Head>
 
       <div className={styles.container}>
-        <div className={styles.chat}>
-          <Header user_session={user_session} />
-          <MessageList user_session={user_session} />
-          <InputMessage user_session={user_session} />
+        <div className={styles.main}>
+          <div className={styles.chat}>
+            <Header user_session={user_session} />
+            <MessageList user_session={user_session} />
+            <InputMessage user_session={user_session} />
+          </div>
+
+          <Sidebar />
         </div>
       </div>
     </>
@@ -32,11 +37,21 @@ export default function Chat({ user_session }: ChatProps) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
 
+  const { query } = context;
+
   if (!cookies.alurawitcher_user) {
     return {
       redirect: {
         permanent: false,
         destination: "/",
+      }
+    }
+  }
+
+  if (query.username) {
+    return {
+      props: {
+        user_session: query.username,
       }
     }
   }

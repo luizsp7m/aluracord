@@ -10,6 +10,11 @@
   // background-image: linear-gradient(to right bottom, #f956b3, #ff4f8c, #ff5765, #ff683e, #eb7d0e);
 }
 
+.main {
+  display: flex;
+  gap: 1.2rem;
+}
+
 .chat {
   background: #1a202c;
   width: 100%;

@@ -1,0 +1,15 @@
+.container {
+  background: #1a202c;
+  padding: 3.2rem;
+  border-radius: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+
+  > img {
+    height: 5rem;
+    width: 5rem;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
