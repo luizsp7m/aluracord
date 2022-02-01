@@ -21,12 +21,13 @@ Outras mudanças em relação a aplicação original são:
 - Enviar stickers
 - Editar mensagem
 - Excluir mensagens / stickers
+- Popover com informações do usário do Github
 - Chat em realtime
 - Logout
 
-#### Tecnologias:
+### Tecnologias:
 
 - Next.js
 - Typescript
-- SCSS
+- SASS
 - Supabase
