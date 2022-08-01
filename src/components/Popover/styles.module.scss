@@ -1,5 +1,5 @@
 .popover {
-  background: #222f3e;
+  background: var(--background-tertiary);
   left: 4.5rem;
   border-radius: 0.8rem;
   position: absolute;
@@ -7,10 +7,11 @@
   display: flex;
   align-items: center;
   gap: 1.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 
   p {
     font-size: 1.2rem;
-    color: #e2e8f0;
+    color: var(--text-primary);
     line-height: 3.2rem;
   }
 
@@ -20,7 +21,7 @@
     content: "";
     height: 1.6rem;
     width: 1.6rem;
-    background: #222f3e;
+    background: var(--background-tertiary);
     transform: rotate(45deg);
   }
 }
@@ -41,7 +42,7 @@
 
   span {
     font-size: 1.6rem;
-    color: #edf2f7;
+    color: var(--text-tertiary);
   }
 }
 
@@ -55,18 +56,7 @@
     align-items: center;
     gap: 0.8rem;
     font-size: 1.4rem;
-    color: #718096;
-  }
-}
-
-.githubProfile {
-  display: flex;
-  gap: 1.2rem;
-  align-items: center;
-
-  label {
-    font-size: 1.4rem;
-    color: #a0aec0;
+    color: var(--text-secondary);
   }
 }
 

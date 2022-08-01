@@ -9,7 +9,7 @@
   border-radius: 0.25rem;
 
   &:hover {
-    background: #242526;
+    background: var(--background-secondary);
 
     .buttonGroup {
       display: flex;
@@ -37,19 +37,12 @@
 
   span {
     font-size: 1.6rem;
-    color: #e2e8f0;
+    color: var(--text-tertiary);
   }
 
   time {
     font-size: 1.2rem;
-    color: #a0aec0;
-  }
-
-  h6 {
-    font-size: 1rem;
-    color: #a0aec0;
-    font-weight: 500;
-    font-family: "Inter", sans-serif;
+    color: var(--text-secondary);
   }
 }
 
@@ -61,13 +54,13 @@
   }
 
   p {
-    color: #cbd5e0;
+    color: var(--text-primary);
     font-size: 1.4rem;
     line-height: 2.4rem;
 
     span {
       font-size: 1rem;
-      color: #a0aec0;
+      color:  var(--text-secondary);
       font-weight: 500;
       font-family: "Inter", sans-serif;
     }
@@ -82,7 +75,7 @@
   padding: 0.6rem;
   gap: 1.2rem;
   border-radius: 0.4rem;
-  background: #2d3748;
+  background: var(--primary-color);
 
   button {
     font-size: 0;
@@ -117,7 +110,7 @@
     border-radius: 0.4rem;
     border: none;
     background: rgba(0, 0, 0, 0.1);
-    color: #cbd5e0;
+    color: var(--text-secondary);
     transition: background 0.2s ease-in-out;
 
     &:focus {
@@ -126,11 +119,11 @@
   }
 
   button {
-    background: #2d3748;
+    background: var(--primary-color);
     border: 0;
     padding: 1rem;
     border-radius: 0.4rem;
-    color: #e2e8f0;
+    color: var(--text-tertiary);
     transition: opacity 0.2s ease-in-out;
     height: 4rem;
     width: 6.2rem;

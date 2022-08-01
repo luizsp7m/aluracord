@@ -10,7 +10,7 @@
     width: 5.4rem;
     border-radius: 0.4rem;
     border: none;
-    background: #242526;
+    background: var(--background-secondary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@
 }
 
 .inputMessage {
-  background: #242526;
+  background: var(--background-secondary);
   border-radius: 0.4rem;
   gap: 0.6rem;
   display: flex;
@@ -53,11 +53,11 @@
     outline: none;
     border-radius: 0.4rem;
     border: none;
-    background: #242526;
-    color: #cbd5e0;
+    background: var(--background-secondary);
+    color: var(--text-primary);
 
     &::placeholder {
-      color: #718096;
+      color: var(--text-secondary);
     }
   }
 }

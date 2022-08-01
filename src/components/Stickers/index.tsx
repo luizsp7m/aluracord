@@ -28,8 +28,9 @@ export function Stickers({ user_session, onClose }: StickersProps) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Stickers</h1>
-        <button onClick={onClose}><IoIosClose size={24} color="#E53E3E" /></button>
+        <button onClick={onClose}>
+          <span>Fechar</span>
+        </button>
       </div>
 
       <div className={styles.stickers}>

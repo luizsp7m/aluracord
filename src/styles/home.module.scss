@@ -4,22 +4,18 @@
   justify-content: center;
   align-items: center;
   padding: 0 2.4rem;
-  background-image: url("/assets/61f7fd3cbc411.jpg");
-  background-size: cover;
-  background-position: center;
-  // background-image: linear-gradient(to right bottom, #f956b3, #ff4f8c, #ff5765, #ff683e, #eb7d0e);
 }
 
 .login {
   width: 100%;
-  max-width: 375px;
+  max-width: 425px;
   padding: 3.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.8rem;
   border-radius: 0.8rem;
-  background: #1a202c;
+  background: var(--background-secondary);
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -29,12 +25,12 @@
 
   h1 {
     font-size: 2.4rem;
-    color: #edf2f7;
+    color: var(--text-primary);
   }
 
   span {
     font-size: 1.6rem;
-    color: #cbd5e0;
+    color: var(--text-secondary);
     line-height: 3.2rem;
   }
 }
@@ -54,17 +50,10 @@
     object-fit: cover;
   }
 
-  div#image {
-    height: 17rem;
-    width: 17rem;
-    border-radius: 50%;
-    background: #2d3748;
-  }
-
   span {
     font-size: 1.6rem;
-    color: #cbd5e0;
-    background: #2d3748;
+    color: var(--text-primary);
+    background: var(--background-tertiary);
     padding: 0.5rem 0.75rem;
     border-radius: 0.4rem;
     height: 3rem;
@@ -77,7 +66,7 @@
   gap: 1.2rem;
 
   label {
-    color: #a0aec0;
+    color: var(--text-secondary);
     font-size: 1.4rem;
   }
 }
@@ -95,12 +84,12 @@
 
     label {
       font-size: 1.4rem;
-      color: #a0aec0;
+      color: var(--text-secondary);
       font-weight: 500;
     }
 
     h6 {
-      color: #f56565;
+      color: var(--danger-color);
       font-size: 1.2rem;
       font-weight: normal;
       font-family: "Inter", sans-serif;
@@ -108,18 +97,18 @@
   }
 
   button {
-    height: 3.6rem;
+    height: 5.4rem;
     border: 0;
     outline: 0;
     border-radius: 0.4rem;
-    color: #edf2f7;
-    background: #e53e3e;
+    color: var(--text-primary);
+    background: var(--primary-color);
     font-weight: 500;
     font-size: 1.4rem;
     transition: background 0.2s ease-in-out;
 
     &:hover {
-      background: #c53030;
+      background: var(--primary-color-hover);
     }
 
     &:disabled {
@@ -135,17 +124,17 @@
   border-radius: 0.4rem;
   padding-right: 1.2rem;
   border: 1px solid transparent;
-  background: #2d3748;
+  background: var(--background-tertiary);
 
   input {
-    height: 3.6rem;
+    height: 5.4rem;
     border: 0;
     outline: 0;
     border-radius: 0.4rem;
-    color: #edf2f7;
+    color: var(--text-primary);
     padding: 0 1.2rem;
     font-size: 1.4rem;
-    background: #2d3748;
+    background: var(--background-tertiary);
     flex: 1;
   }
 }

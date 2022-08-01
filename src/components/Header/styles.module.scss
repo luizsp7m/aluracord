@@ -24,12 +24,12 @@
 
     span {
       font-size: 1.4rem;
-      color: #cbd5e0;
+      color: var(--text-primary);
       transition: color 0.2s ease-in-out;
       cursor: pointer;
 
       &:hover {
-        color: #e2e8f0;
+        color: var(--text-secondary);
       }
     }
   }

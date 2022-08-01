@@ -10,7 +10,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #718096;
+    background: var(--background-tertiary);
     border-radius: 0.4rem;
   }
 }

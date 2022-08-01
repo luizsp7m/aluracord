@@ -1,5 +1,13 @@
 :root {
-  
+  --primary-color: #575fcf;
+  --primary-color-hover: #686fd4;
+  --danger-color: #f56565;
+  --background-primary: #18191A;
+  --background-secondary: #242526;
+  --background-tertiary: #35383E; 
+  --text-primary: #cbd5e0;
+  --text-secondary: #a0aec0;
+  --text-tertiary: #e2e8f0;
 }
 
 * {
@@ -13,7 +21,7 @@ html {
 }
 
 body {
-  background: #18191A;
+  background: var(--background-primary);
 }
 
 body, input, button, textarea {

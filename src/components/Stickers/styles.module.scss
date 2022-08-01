@@ -1,24 +1,25 @@
 .container {
   position: absolute;
   right: 0;
-  bottom: 6rem;
+  bottom: 8rem;
   right: 2rem;
-  // background: #1e272e;
-  background: #283141;
-  border-radius: 0.8rem;
-  padding: 1.6rem;
+  background: var(--background-secondary);
+  border-radius: 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.8rem;
+  justify-content: flex-end;
+  padding: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-  h1 {
-    color: #e2e8f0;
-    font-size: 1.6rem;
-    cursor: default;
+  > button {
+    > span {
+      font-size: 1.15rem;
+      color: var(--danger-color);
+    }
   }
 }
 
@@ -28,14 +29,15 @@
   gap: 2.8rem;
   overflow-y: auto;
   height: 20rem;
-  border-radius: 0.4rem;
+  padding: 1.4rem;
 
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    display: none;
+    background: var(--background-tertiary);
+    border-radius: 0.4rem;
   }
 
   img {
