@@ -1,5 +1,4 @@
 import styles from "./styles.module.scss";
-import format from "date-fns/format";
 import Link from "next/link";
 
 import { FormEvent, useEffect, useState } from "react";
@@ -10,6 +9,8 @@ import { IoIosClose } from "react-icons/io";
 import { BiPencil } from "react-icons/bi";
 import { Popover } from "../Popover";
 import { Spinner } from "../Spinner";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface MessageItemProps {
   user_session: string;
@@ -60,7 +61,9 @@ export function MessageItem({ message, user_session }: MessageItemProps) {
     setMessageContent(message.content);
   }, [inputEditMessageIsOpen]);
 
-  const dateFormatted = format(new Date(message.created_at), `dd MMM. yyyy - HH:mm`);
+  const dateFormatted = format(new Date(message.created_at), `dd MMM. yyyy - HH:mm`, {
+    locale: ptBR,
+  });
 
   return (
     <div className={styles.message}>

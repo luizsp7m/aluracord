@@ -17,10 +17,11 @@ export function Header({ user_session }: HeaderProps) {
 
   return (
     <div className={styles.header}>
-      <h1>Chat</h1>
+      <img src="/assets/favicon.png" alt="Lobo" />
+
       <div>
         <img src={`https://github.com/${user_session}.png`} alt="" />
-        <span onClick={logout}>Logout</span>
+        <span onClick={logout}>Sair</span>
       </div>
     </div>
   );
