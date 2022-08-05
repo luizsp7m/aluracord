@@ -35,7 +35,42 @@
   }
 }
 
-@media(max-width: 968px) {
+.signOutButton {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.25rem 2rem;
+  border: 0;
+  outline: 0;
+  background: var(--background-tertiary);
+  border-radius: 1.25rem;
+  transition: opacity 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  svg {
+    fill: var(--text-primary);
+  }
+
+  h5 {
+    font-size: 1.45rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  span {
+    color: var(--danger-color);
+    font-size: 1.5rem;
+    line-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 968px) {
   .header {
     padding: 0 1.6rem;
   }
