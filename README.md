@@ -11,8 +11,8 @@ Outras mudanças em relação a aplicação original são:
 - Loadings
 - Sons
 
-![](./public/design/login-preview.png)
-![](./public/design/chat-preview.png)
+![](./public/design/login.png)
+![](./public/design/chat.png)
 
 ### Funcionalidades
 
